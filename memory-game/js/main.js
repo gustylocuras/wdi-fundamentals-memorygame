@@ -19,9 +19,20 @@ let cards = [
 	{
 		rank: "king",
 		suit: "diamonds",
-		cardImage: "images/king-of-hearts.png"
+		cardImage: "images/king-of-diamonds.png"
 	}
 ];
+
+
+let playerScore = 0;
+
+let computerScore = 0;
+
+function updateScore(score){
+
+	return score + 1;
+} 
+
 
 let cardsInPlay = [];
 
@@ -39,13 +50,21 @@ function flipCard(){
 	if (cardsInPlay[0] === cardsInPlay[1]){
 		
 		alert("You found a match!");
-		
+
+		playerScore = updateScore(playerScore);
+
+		document.getElementById('player-score').innerHTML = playerScore;
+
 		setTimeout (function(){reset()}, 1000);
 		
 		setTimeout (function(){createBoard()}, 1000);
 	
 
 		} else { alert("Sorry, try again");
+
+		computerScore = updateScore(computerScore);
+
+		document.getElementById('computer-score').innerHTML = computerScore;
 		
 		setTimeout (function(){reset()}, 1000);
 		
@@ -83,6 +102,7 @@ function shuffleCards(arr){
 	}
 	return arr;
 }
+
 
 function createBoard(){
 

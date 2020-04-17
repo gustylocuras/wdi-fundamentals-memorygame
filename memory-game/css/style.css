@@ -40,6 +40,12 @@ h2 {
   font-size: 20px;
 }
 
+h3 {
+  color: #0D2C40;
+  font-weight: 500;
+  margin: 0px;
+}
+
 p {
   font-family: "Droid Serif", serif;
   line-height: 26px;
@@ -107,6 +113,29 @@ footer {
   font-weight: 500;
 
 }
+
+/* =============================
+SCOREBOARD
+================================ */
+table {
+  color: white;
+  text-align: center;
+  margin: 10px 320px;
+  border: none;
+  background-color: rgba(241,91,49,.8);
+  border-radius: 20px;
+}
+
+th {
+  font-weight: 600;
+  padding: 5px 15px;
+}
+
+td {
+  font-weight: inherit;
+  padding-bottom: 6px;
+}
+
 
 .copyright {
   float: left;
