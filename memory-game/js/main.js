@@ -1,60 +1,108 @@
 
 
 let cards = [
-{
-	rank: "queen",
-	suit: "hearts",
-	cardImage: "images/queen-of-hearts.png"
-},
-{
-	rank: "queen",
-	suit: "diamonds",
-	cardImage: "images/queen-of-diamonds.png"
-},
-{
-	rank: "king",
-	suit: "hearts",
-	cardImage: "images/king-of-hearts.png"
-},
-{
-	rank: "king",
-	suit: "diamonds",
-	cardImage: "images/king-of-hearts.png"
-}
+	{
+		rank: "queen",
+		suit: "hearts",
+		cardImage: "images/queen-of-hearts.png"
+	},
+	{
+		rank: "queen",
+		suit: "diamonds",
+		cardImage: "images/queen-of-diamonds.png"
+	},
+	{
+		rank: "king",
+		suit: "hearts",
+		cardImage: "images/king-of-hearts.png"
+	},
+	{
+		rank: "king",
+		suit: "diamonds",
+		cardImage: "images/king-of-hearts.png"
+	}
 ];
 
 let cardsInPlay = [];
 
-function checkForMatch(){
-	if (cardsInPlay[0] === cardsInPlay[1]) {
-  console.log("You found a match!");
-} else {
-  console.log("Sorry, try again.");
-}
-}
 
-function flipCard(cardId){
+function flipCard(){
 
-console.log("User flipped " + cards[cardId].rank);
+	let cardId = this.getAttribute('data-id');
 
-console.log(cards[cardId].suit);
+	cardsInPlay.push(cards[cardId].rank);
 
-console.log(cards[cardId].cardImage);
+	this.setAttribute("src", cards[cardId].cardImage);
 
-cardsInPlay.push(cards[cardId].rank);
-
-
-if(cardsInPlay.length === 2){
+	if(cardsInPlay.length === 2){
+	
 	if (cardsInPlay[0] === cardsInPlay[1]){
-		alert("You found a match!")
-	} else { alert("Sorry, try again");}
+		
+		alert("You found a match!");
+		
+		setTimeout (function(){reset()}, 1000);
+		
+		setTimeout (function(){createBoard()}, 1000);
+	
 
-checkForMatch();
-
+		} else { alert("Sorry, try again");
+		
+		setTimeout (function(){reset()}, 1000);
+		
+		setTimeout (function(){createBoard()}, 1000);
+		
+		}
+	}
 }
+
+function reset(){
+ 	
+ 	for (let i = 0; i < cards.length; i++){
+ 	
+ 	let cardPlayed = document.querySelector('img');
+ 	
+ 	document.getElementById('game-board').removeChild(cardPlayed);
+	
+	}
 }
 
 
-flipCard(0);
-flipCard(2);
+function shuffleCards(arr){
 
+	let newOrder;
+
+	for (let i = arr.length - 1; i > 0; i--){
+
+		newOrder = Math.floor(Math.random() * (i + 1));
+
+		temp = arr[i];
+
+		arr[i] = arr[newOrder];
+
+		arr[newOrder] = temp;
+	}
+	return arr;
+}
+
+function createBoard(){
+
+	shuffleCards(cards);
+
+	for (let i = 0; i < cards.length; i++){
+    
+    let cardElement = document.createElement('img');
+    
+    cardElement.setAttribute('src', "images/back.png");
+
+    cardElement.setAttribute('data-id', i);
+
+    cardElement.addEventListener('click', flipCard);
+
+    document.getElementById('game-board').appendChild(cardElement);
+
+    cardsInPlay = [];
+	
+	}
+}
+
+createBoard();
